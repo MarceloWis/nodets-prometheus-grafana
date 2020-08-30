@@ -2,16 +2,14 @@ version: "3"
 
 services:
 
-  app:
-    build: .
+  nodets:
+    build: ./nodets
     entrypoint: ./.docker/entrypoint.sh
-    container_name: app
-    environment:
-      - CHOKIDAR_USEPOLLING=true
+    container_name: nodets
     ports:
       - 3333:3333
     volumes:
-      - .:/home/node/nodets-prometheus-grafana
+      - ./nodets:/home/node/nodets
 
 
 
