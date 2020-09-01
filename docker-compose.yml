@@ -1,7 +1,10 @@
 version: "3"
 
-services:
+networks:
+  monitor-net:
+    driver: bridge
 
+services:
   nodets:
     build: ./nodets
     entrypoint: ./.docker/entrypoint.sh
@@ -10,3 +13,15 @@ services:
       - 3333:3333
     volumes:
       - ./nodets:/home/node/nodets
+    networks:
+      - monitor-net
+  prometheus2:
+    container_name: prometheus2
+    image: prom/prometheus:latest
+    volumes: 
+        - ./server/prometheus:/prometheus
+    command: ["--config.file=prometheus.yml"]
+    ports: 
+        - 9090:9090
+    networks:
+        - monitor-net
