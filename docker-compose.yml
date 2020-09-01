@@ -10,6 +10,3 @@ services:
       - 3333:3333
     volumes:
       - ./nodets:/home/node/nodets
-
-
-
